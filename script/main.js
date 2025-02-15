@@ -4,7 +4,7 @@ const fetchData = () => {
     .then(data => data.json())
     .then(data => {
       dataArr = Object.keys(data);
-      dataArr.map(customData => {
+      dataArr.forEach(customData => {
         if (data[customData] !== "") {
           if (customData === "imagePath") {
             document
@@ -17,10 +17,16 @@ const fetchData = () => {
 
         // Check if the iteration is over
         // Run amimation if so
-        if ( dataArr.length === dataArr.indexOf(customData) + 1 ) {
+        if (dataArr.indexOf(customData) === dataArr.length - 1) {
           // Start playing music
 const audio = document.getElementById("birthday-song");
-audio.play().catch(error => console.log("Autoplay blocked:", error));
+if (audio) {
+  document.addEventListener("click", () => {
+  audio.play().catch(error => console.error("Audio play failed:", error));
+}, { once: true });
+} else {
+  console.error("Audio element not found!");
+}
 
           animationTimeline();
         } 
@@ -36,11 +42,11 @@ const animationTimeline = () => {
 
   textBoxChars.innerHTML = `<span>${textBoxChars.innerHTML
     .split("")
-    .join("</span><span>")}</span`;
+    .join("</span><span>")}</span>`;
 
   hbd.innerHTML = `<span>${hbd.innerHTML
     .split("")
-    .join("</span><span>")}</span`;
+    .join("</span><span>")}</span>`;
 
   const ideaTextTrans = {
     opacity: 0,
