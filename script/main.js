@@ -18,6 +18,10 @@ const fetchData = () => {
         // Check if the iteration is over
         // Run amimation if so
         if ( dataArr.length === dataArr.indexOf(customData) + 1 ) {
+          // Start playing music
+const audio = document.getElementById("birthday-song");
+audio.play().catch(error => console.log("Autoplay blocked:", error));
+
           animationTimeline();
         } 
       });
