@@ -19,14 +19,18 @@ const fetchData = () => {
         // Run amimation if so
         if (dataArr.indexOf(customData) === dataArr.length - 1) {
           // Start playing music
-const audio = document.getElementById("birthday-song");
-if (audio) {
-  document.addEventListener("click", () => {
-  audio.play().catch(error => console.error("Audio play failed:", error));
-}, { once: true });
-} else {
-  console.error("Audio element not found!");
-}
+// Ensure audio plays only after user interaction
+document.addEventListener("click", () => {
+  const audio = document.getElementById("birthday-song");
+  if (audio) {
+    audio.play()
+      .then(() => console.log("Audio playing..."))
+      .catch(error => console.error("Audio play failed:", error));
+  } else {
+    console.error("Audio element not found!");
+  }
+}, { once: true }); // Runs only once
+
 
           animationTimeline();
         } 
